@@ -21,10 +21,10 @@ varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'ChildPoverty', 'Professional', 'Service', 'Office', 'Construction',
        'Production', 'Drive', 'Carpool', 'Transit', 'Walk', 'OtherTransp',
        'WorkAtHome', 'MeanCommute', 'Employed', 'PrivateWork', 'PublicWork',
-       'SelfEmployed', 'FamilyWork', 'Unemployment', 'RUCC_2013']
+       'SelfEmployed', 'FamilyWork', 'Unemployment']
 
-# df=pd.read_csv('resources/az-stats.csv')
-df=pd.read_pickle('resources/va-stats.pkl')
+df=pd.read_csv('az-stats.csv')
+# df=pd.read_pickle('resources/va-stats.pkl')
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -68,10 +68,10 @@ def display_results(selected_value):
     valmin=df[selected_value].min()
     valmax=df[selected_value].max()
     fig = go.Figure(go.Choroplethmapbox(geojson=counties,
-                                    locations=df['FIPS'],
+                                    locations=df['CountyID'],
                                     z=df[selected_value],
                                     colorscale='Blues',
-                                    text=df['County'],
+                                    text=df['CountyID'],
                                     zmin=valmin,
                                     zmax=valmax,
                                     marker_line_width=0))
