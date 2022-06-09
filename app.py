@@ -68,10 +68,10 @@ def display_results(selected_value):
     valmin=df[selected_value].min()
     valmax=df[selected_value].max()
     fig = go.Figure(go.Choroplethmapbox(geojson=counties,
-                                    locations=df['CountyID'],
+                                    locations=df['FIPS'],
                                     z=df[selected_value],
                                     colorscale='Blues',
-                                    text=df['CountyID'],
+                                    text=df['County'],
                                     zmin=valmin,
                                     zmax=valmax,
                                     marker_line_width=0))
