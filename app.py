@@ -15,15 +15,16 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 tabtitle = 'Arizona Counties'
 sourceurl = 'https://www.kaggle.com/muonneutrino/us-census-demographic-data'
 githublink = 'https://github.com/pgelvin/dash-virginia-counties'
-varlist=['County','TotalPop', 'Men', 'Women', 'Hispanic',
+varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'White', 'Black', 'Native', 'Asian', 'Pacific', 'VotingAgeCitizen',
        'Income', 'IncomeErr', 'IncomePerCap', 'IncomePerCapErr', 'Poverty',
        'ChildPoverty', 'Professional', 'Service', 'Office', 'Construction',
        'Production', 'Drive', 'Carpool', 'Transit', 'Walk', 'OtherTransp',
        'WorkAtHome', 'MeanCommute', 'Employed', 'PrivateWork', 'PublicWork',
-       'SelfEmployed', 'FamilyWork', 'Unemployment']
+       'SelfEmployed', 'FamilyWork', 'Unemployment', 'RUCC_2013']
 
-df=pd.read_csv('resources/az-stats.csv')
+# df=pd.read_csv('resources/az-stats.csv')
+df=pd.read_pickle('resources/va-stats.pkl')
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -69,7 +70,7 @@ def display_results(selected_value):
     fig = go.Figure(go.Choroplethmapbox(geojson=counties,
                                     locations=df['FIPS'],
                                     z=df[selected_value],
-                                    colorscale='Reds',
+                                    colorscale='Blues',
                                     text=df['County'],
                                     zmin=valmin,
                                     zmax=valmax,
