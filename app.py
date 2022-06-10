@@ -14,7 +14,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 tabtitle = 'Arizona Counties'
 sourceurl = 'https://www.kaggle.com/muonneutrino/us-census-demographic-data'
-githublink = 'https://github.com/pgelvin/dash-virginia-counties/tree/master/resources'
+githublink = 'https://github.com/pgelvin/dash-virginia-counties'
 varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'White', 'Black', 'Native', 'Asian', 'Pacific', 'VotingAgeCitizen',
        'Income', 'IncomeErr', 'IncomePerCap', 'IncomePerCapErr', 'Poverty',
@@ -23,7 +23,7 @@ varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'WorkAtHome', 'MeanCommute', 'Employed', 'PrivateWork', 'PublicWork',
        'SelfEmployed', 'FamilyWork', 'Unemployment']
 
-df=pd.read_csv('az-stats.csv')
+df=pd.read_csv('resources/az-stats.csv')
 # df=pd.read_pickle('resources/va-stats.pkl')
 
 ########### Initiate the app
