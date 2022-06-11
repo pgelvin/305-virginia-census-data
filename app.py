@@ -12,7 +12,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 ########### Define a few variables ######
 
-tabtitle = 'Arizona Counties'
+tabtitle = 'Texas Counties'
 sourceurl = 'https://www.kaggle.com/muonneutrino/us-census-demographic-data'
 githublink = 'https://github.com/pgelvin/dash-virginia-counties'
 
@@ -24,8 +24,8 @@ varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'WorkAtHome', 'MeanCommute', 'Employed', 'PrivateWork', 'PublicWork',
        'SelfEmployed', 'FamilyWork', 'Unemployment']
 
-df=pd.read_csv('resources/az-stats.csv')
-df['FIPS'] = df['FIPS'].apply('{:0>5}'.format) # this adds a leading zero to the csv dataset neededfor visualization
+df=pd.read_csv('resources/tx-stats.csv')
+# df['FIPS'] = df['FIPS'].apply('{:0>5}'.format) # this adds a leading zero to the csv dataset neededfor visualization
 # df=pd.read_pickle('resources/va-stats.pkl')
 
 ########### Initiate the app
@@ -37,7 +37,7 @@ app.title=tabtitle
 ########### Layout
 
 app.layout = html.Div(children=[
-    html.H1('Arizona Census Data 2017 - Pat Gelvin'),
+    html.H1('Texas Census Data 2017 - Pat Gelvin'),
     # Dropdowns
     html.Div(children=[
         # left side
@@ -51,7 +51,7 @@ app.layout = html.Div(children=[
         ], className='three columns'),
         # right side
         html.Div([
-            dcc.Graph(id='az-map')
+            dcc.Graph(id='tx-map')
         ], className='nine columns'),
     ], className='twelve columns'),
 
@@ -64,7 +64,7 @@ app.layout = html.Div(children=[
 )
 
 ############ Callbacks
-@app.callback(Output('az-map', 'figure'),
+@app.callback(Output('tx-map', 'figure'),
               [Input('stats-drop', 'value')])
 def display_results(selected_value):
     valmin=df[selected_value].min()
@@ -79,7 +79,7 @@ def display_results(selected_value):
                                     marker_line_width=0))
     fig.update_layout(mapbox_style="carto-positron",
                       mapbox_zoom=5.8,
-                      mapbox_center = {"lat": 33.4484, "lon": -112.0740})
+                      mapbox_center = {"lat": 31.5365, "lon": -110.1234})
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 # https://community.plot.ly/t/what-colorscales-are-available-in-plotly-and-which-are-the-default/2079
