@@ -15,6 +15,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 tabtitle = 'Arizona Counties'
 sourceurl = 'https://www.kaggle.com/muonneutrino/us-census-demographic-data'
 githublink = 'https://github.com/pgelvin/dash-virginia-counties'
+
 varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'White', 'Black', 'Native', 'Asian', 'Pacific', 'VotingAgeCitizen',
        'Income', 'IncomeErr', 'IncomePerCap', 'IncomePerCapErr', 'Poverty',
@@ -24,6 +25,7 @@ varlist=['TotalPop', 'Men', 'Women', 'Hispanic',
        'SelfEmployed', 'FamilyWork', 'Unemployment']
 
 df=pd.read_csv('resources/az-stats.csv')
+df['FIPS'] = df['FIPS'].apply('{:0>5}'.format) # this adds a leading zero to the csv dataset neededfor visualization
 # df=pd.read_pickle('resources/va-stats.pkl')
 
 ########### Initiate the app
@@ -70,7 +72,7 @@ def display_results(selected_value):
     fig = go.Figure(go.Choroplethmapbox(geojson=counties,
                                     locations=df['FIPS'],
                                     z=df[selected_value],
-                                    colorscale='Blues',
+                                    colorscale='reds',
                                     text=df['County'],
                                     zmin=valmin,
                                     zmax=valmax,
@@ -82,7 +84,6 @@ def display_results(selected_value):
 
 # https://community.plot.ly/t/what-colorscales-are-available-in-plotly-and-which-are-the-default/2079
     return fig
-
 
 ############ Deploy
 if __name__ == '__main__':
